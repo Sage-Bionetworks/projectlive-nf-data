@@ -34,6 +34,8 @@ store_file_in_synapse(
   live_folder
 )
 
+file.remove("studies.RDS")
+
 
 # files ----
 files <-
@@ -84,6 +86,8 @@ files <-
 saveRDS(files, "files.RDS")
 store_file_in_synapse(syn, "files.RDS", dev_folder)
 store_file_in_synapse(syn, "files.RDS", live_folder)
+file.remove("files.RDS")
+
 
 # incoming data ----
 
@@ -139,6 +143,7 @@ incoming_data <-
 saveRDS(incoming_data, "incoming_data.RDS")
 store_file_in_synapse(syn, "incoming_data.RDS", live_folder)
 store_file_in_synapse(syn, "incoming_data.RDS", dev_folder)
+file.remove("incoming_data.RDS")
 
 # publications ----
 pubs <- 
@@ -151,9 +156,11 @@ pubs <-
 saveRDS(pubs, "pubs.RDS")
 store_file_in_synapse(syn, "pubs.RDS", live_folder)
 store_file_in_synapse(syn, "pubs.RDS", dev_folder)
+file.remove("pubs.RDS")
 
 # tools ----
 tools <- get_synapse_tbl(syn, "syn16859448")
 saveRDS(tools, "tools.RDS")
 store_file_in_synapse(syn, "tools.RDS", live_folder)
 store_file_in_synapse(syn, "tools.RDS", dev_folder)
+file.remove("tools.RDS")
