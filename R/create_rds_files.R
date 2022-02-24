@@ -9,7 +9,8 @@ source("https://raw.githubusercontent.com/Sage-Bionetworks/projectlive.modules/2
 reticulate::use_condaenv("sage-bionetworks", required = T)
 synapseclient <- reticulate::import("synapseclient")
 syn <- synapseclient$Synapse()
-syn$login()
+auth_token <- rjson::fromJSON(Sys.getenv("SCHEDULED_JOB_SECRETS"))$SYNAPSE_AUTH_TOKEN
+syn$login(authToken=auth_token)
 
 store_file_in_synapse <- function(syn, file, parent_id){
   file <- reticulate::import("synapseclient")$File(file, parent_id)
