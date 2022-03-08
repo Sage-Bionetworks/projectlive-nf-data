@@ -37,8 +37,9 @@ RUN conda init bash \
     && conda activate base || true \
     && echo "conda activate sage-bionetworks" >> ~/.bashrc
 
-
-RUN R -e "library(devtools);devtools::install_version('reticulate', version = '1.19', repos='http://cran.rstudio.com/')"
+COPY renv.lock .
+RUN R -e "install.packages('renv')"
+RUN R -e "renv::restore()"
 
 COPY R/create_rds_files.R /usr/local/bin/
 RUN chmod a+x /usr/local/bin/create_rds_files.R
